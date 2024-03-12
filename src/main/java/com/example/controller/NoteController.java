@@ -8,14 +8,15 @@ import lombok.RequiredArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.UUID;
-//@Validated
-@RequiredArgsConstructor
-@RestController
+@Validated
+//@RequiredArgsConstructor
+@Controller
 @RequestMapping("/note")
 public class NoteController {
 
