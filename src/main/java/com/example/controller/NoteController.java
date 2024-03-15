@@ -39,7 +39,7 @@ public class NoteController {
     @GetMapping("/edit")
     public ModelAndView editNote(@NotNull @RequestParam(value = "id") UUID id) throws NoteNotFoundException {
         ModelAndView result = new ModelAndView("note/update");
-        result.addObject("note", noteService.getById(id));
+        result.addObject("note", noteService.getById(id).get());
         return result;
     }
     @PostMapping("/update")
