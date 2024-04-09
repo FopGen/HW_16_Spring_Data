@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface NoteService {
      List<Note> listAll();
 
-     Note add(Note note);
+     Note add(Note note) throws NoteNotFoundException;
 
      void deleteById(UUID id) throws NoteNotFoundException;
 

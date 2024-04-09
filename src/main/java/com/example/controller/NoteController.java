@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.UUID;
 @Validated
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/note")
 public class NoteController {
@@ -23,6 +23,18 @@ public class NoteController {
     @Autowired
     private NoteService noteService;
 
+    @GetMapping("/create")
+    public ModelAndView createNote(){
+        ModelAndView result = new ModelAndView("note/create");
+//        result.addObject("note", noteService.getById(id).get());
+        return result;
+
+    }
+    @PostMapping("/createNote")
+    public ModelAndView createNote(Note dto) throws NoteNotFoundException {
+        noteService.add(dto);
+        return getListNote();
+    }
     @GetMapping("/list")
     public ModelAndView getListNote(){
         ModelAndView result = new ModelAndView("note/list");

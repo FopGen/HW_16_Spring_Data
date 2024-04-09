@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create note</title>
+</head>
+<body>
+<form action="/note/createNote" method="post">
+    <div hidden="hidden">
+        <label for="idForCreate">Id:</label>
+<!--        <input type="text" name="id" id="idForCreate" th:value="" contenteditable="false"/>-->
+        <input type="text" name="id" id="idForCreate"/>
+    </div>
+
+    <div>
+        <label for="titleForCreate">Title:</label>
+        <input type="text" name="title" id="titleForCreate"/>
+    </div>
+
+    <div>
+        <label for="contentForCreate">Content:</label>
+        <input type="text" name="content" id="contentForCreate"/>
+    </div>
+
+    <div>
+        <button type="submit">Send</button>
+    </div>
+</form>
+</body>
+</html>
