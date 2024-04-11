@@ -1,62 +1,46 @@
 package com.example.controller;
 
-import com.example.service.dto.Note;
+import com.example.notes.dto.create.CreateNoteRequest;
+import com.example.notes.dto.create.CreateNoteResponse;
+import com.example.notes.dto.delete.DeleteNoteResponse;
+import com.example.notes.dto.get.GetNotesResponse;
+import com.example.notes.dto.update.UpdateNoteRequest;
+import com.example.notes.dto.update.UpdateNoteResponse;
 import com.example.service.exception.NoteNotFoundException;
 import com.example.service.services.NoteService;
-import com.example.service.services.NoteServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.util.UUID;
+
 @Validated
 @RequiredArgsConstructor
-@Controller
-@RequestMapping("/note")
+@RestController
+@RequestMapping("/api")
 public class NoteController {
 
     @Autowired
     private NoteService noteService;
 
-    @GetMapping("/create")
-    public ModelAndView createNote(){
-        ModelAndView result = new ModelAndView("note/create");
-//        result.addObject("note", noteService.getById(id).get());
-        return result;
-
-    }
-    @PostMapping("/createNote")
-    public ModelAndView createNote(Note dto) throws NoteNotFoundException {
-        noteService.add(dto);
-        return getListNote();
-    }
-    @GetMapping("/list")
-    public ModelAndView getListNote(){
-        ModelAndView result = new ModelAndView("note/list");
-        result.addObject("notes", noteService.listAll());
-        return result;
+    @PostMapping()
+    public CreateNoteResponse createNote(@RequestBody CreateNoteRequest request){
+        return noteService.create(request);
     }
 
-    @GetMapping("/delete")
-    public ModelAndView deleteNote(@RequestParam(value = "id") UUID id) throws NoteNotFoundException {
-        ModelAndView result = new ModelAndView();
-        noteService.deleteById(id);
-        return getListNote();
+    @GetMapping()
+    public GetNotesResponse getNotes(){
+        return noteService.getNotes();
     }
-    @GetMapping("/edit")
-    public ModelAndView editNote(@NotNull @RequestParam(value = "id") UUID id) throws NoteNotFoundException {
-        ModelAndView result = new ModelAndView("note/update");
-        result.addObject("note", noteService.getById(id).get());
-        return result;
-    }
+
     @PostMapping("/update")
-    public ModelAndView updateNote(Note dto) throws NoteNotFoundException {
-        noteService.update(dto);
-        return getListNote();
+    public UpdateNoteResponse updateNote(UpdateNoteRequest request) throws NoteNotFoundException {
+        return noteService.update(request);
     }
+    @GetMapping("/delete")
+    public DeleteNoteResponse delete(@RequestParam(value = "id") UUID id){
+
+        return noteService.delete(id);
+    }
+
 }

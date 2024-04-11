@@ -24,8 +24,7 @@ public class SecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeRequests(authorizeRequests ->
                 authorizeRequests
-                        .requestMatchers("/note/**").permitAll()
-//                        .requestMatchers("/note/update").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/api/notes").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(withDefaults())
                 .formLogin(withDefaults())
