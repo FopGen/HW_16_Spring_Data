@@ -39,7 +39,6 @@ public class NoteService {
         }
 
         Note createdNote = noteRepository.save(Note.builder()
-                .id(UUID.randomUUID())
                 .title(request.getTitle())
                 .content(request.getContent())
                 .build());
@@ -84,10 +83,6 @@ public class NoteService {
         noteRepository.save(note);
 
         return UpdateNoteResponse.success(note);
-    }
-
-    public Optional<Note> getById(UUID id){
-        return noteRepository.findById(id);
     }
 
     private Optional<CreateNoteResponse.Error> validateCreateFields(CreateNoteRequest request) {
