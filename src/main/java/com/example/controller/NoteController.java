@@ -23,21 +23,21 @@ public class NoteController {
     @Autowired
     private NoteService noteService;
 
-    @PostMapping()
+    @PostMapping("/create")
     public CreateNoteResponse createNote(@RequestBody CreateNoteRequest request){
         return noteService.create(request);
     }
 
-    @GetMapping()
+    @GetMapping("/notes")
     public GetNotesResponse getNotes(){
         return noteService.getNotes();
     }
 
-    @PostMapping("/update")
+    @PatchMapping("/update")
     public UpdateNoteResponse updateNote(UpdateNoteRequest request) throws NoteNotFoundException {
         return noteService.update(request);
     }
-    @GetMapping("/delete")
+    @DeleteMapping("/delete")
     public DeleteNoteResponse delete(@RequestParam(value = "id") UUID id){
 
         return noteService.delete(id);
